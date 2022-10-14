@@ -9306,6 +9306,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const core = __importStar(__webpack_require__(2186));
+// import * as github from '@actions/github'
 const utils_1 = __webpack_require__(1314);
 const workflow_handler_1 = __webpack_require__(971);
 function getFollowUrl(workflowHandler, interval, timeout) {
@@ -9346,7 +9347,7 @@ function waitForCompletionOrTimeout(workflowHandler, checkStatusInterval, waitFo
 }
 function computeConclusion(start, waitForCompletionTimeout, result) {
     if (utils_1.isTimedOut(start, waitForCompletionTimeout)) {
-        core.info(`Workflow wait timed out`);
+        core.info('Workflow wait timed out');
         core.setOutput('workflow-conclusion', workflow_handler_1.WorkflowRunConclusion.TIMED_OUT);
         throw new Error('Workflow run has failed due to timeout');
     }
@@ -9370,7 +9371,7 @@ function run() {
             const workflowHandler = new workflow_handler_1.WorkflowHandler(args.token, args.workflowRef, args.owner, args.repo, args.ref);
             // Trigger workflow run
             yield workflowHandler.triggerWorkflow(args.inputs);
-            core.info(`Workflow triggered 🚀`);
+            core.info('Workflow triggered 🚀');
             if (args.displayWorkflowUrl) {
                 const url = yield getFollowUrl(workflowHandler, args.displayWorkflowUrlInterval, args.displayWorkflowUrlTimeout);
                 core.info(`You can follow the running workflow here: ${url}`);
@@ -9379,7 +9380,7 @@ function run() {
             if (!args.waitForCompletion) {
                 return;
             }
-            core.info(`Waiting for workflow completion`);
+            core.info('Waiting for workflow completion');
             const { result, start } = yield waitForCompletionOrTimeout(workflowHandler, args.checkStatusInterval, args.waitForCompletionTimeout);
             core.setOutput('workflow-url', result === null || result === void 0 ? void 0 : result.url);
             computeConclusion(start, args.waitForCompletionTimeout, result);
@@ -9496,13 +9497,13 @@ function formatDuration(duration) {
     let minutesStr = minutes + '';
     let secondsStr = seconds + '';
     if (hours < 10) {
-        hoursStr = "0" + hoursStr;
+        hoursStr = '0' + hoursStr;
     }
     if (minutes < 10) {
-        minutesStr = "0" + minutesStr;
+        minutesStr = '0' + minutesStr;
     }
     if (seconds < 10) {
-        secondsStr = "0" + secondsStr;
+        secondsStr = '0' + secondsStr;
     }
     return hoursStr + 'h ' + minutesStr + 'm ' + secondsStr + 's';
 }
@@ -9706,7 +9707,7 @@ class WorkflowHandler {
                     repo: this.repo
                 });
                 const workflows = workflowsResp.data.workflows;
-                debug_1.debug(`List Workflows`, workflows);
+                debug_1.debug('List Workflows', workflows);
                 // Locate workflow either by name or id
                 const workflowFind = workflows.find((workflow) => workflow.name === this.workflowRef || workflow.id.toString() === this.workflowRef);
                 if (!workflowFind)
