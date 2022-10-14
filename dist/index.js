@@ -9589,7 +9589,14 @@ class WorkflowHandler {
         this.ref = ref;
         this.triggerDate = 0;
         // Get octokit client for making API calls
-        this.octokit = github.getOctokit(token);
+        this.octokit = github.getOctokit(token, {
+            log: {
+                debug: () => console.log,
+                info: () => console.log,
+                warn: console.warn,
+                error: console.error
+            }
+        });
     }
     triggerWorkflow(inputs) {
         return __awaiter(this, void 0, void 0, function* () {

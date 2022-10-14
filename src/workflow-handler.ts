@@ -53,7 +53,16 @@ export class WorkflowHandler {
     private repo: string,
     private ref: string) {
     // Get octokit client for making API calls
-    this.octokit = github.getOctokit(token)
+    this.octokit = github.getOctokit(token,
+      {
+        log: {
+          debug: () => console.log,
+          info: () => console.log,
+          warn: console.warn,
+          error: console.error
+        }
+      }
+    )
   }
 
   async triggerWorkflow(inputs: any): Promise<any> {
