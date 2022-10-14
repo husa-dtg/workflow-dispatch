@@ -9605,7 +9605,7 @@ class WorkflowHandler {
                     ref: this.ref,
                     inputs
                 });
-                core.info(`this.triggerWorkflow(): dispatchResp: ${dispatchResp}`);
+                core.info(`this.triggerWorkflow(): dispatchResp: ${JSON.stringify(dispatchResp)}`);
                 // debug('Workflow Dispatch', dispatchResp)
             }
             catch (error) {
