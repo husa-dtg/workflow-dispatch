@@ -9594,7 +9594,9 @@ class WorkflowHandler {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const workflowId = yield this.getWorkflowId();
+                core.info(`this.triggerWorkflow(): workflowId: ${workflowId}`);
                 this.triggerDate = Date.now();
+                core.info(`this.triggerWorkflow(): triggerDate: ${this.triggerDate}`);
                 const dispatchResp = yield this.octokit.actions.createWorkflowDispatch({
                     owner: this.owner,
                     repo: this.repo,
@@ -9602,7 +9604,8 @@ class WorkflowHandler {
                     ref: this.ref,
                     inputs
                 });
-                debug_1.debug('Workflow Dispatch', dispatchResp);
+                core.info(`this.triggerWorkflow(): dispatchResp: ${dispatchResp}`);
+                // debug('Workflow Dispatch', dispatchResp)
             }
             catch (error) {
                 debug_1.debug('Workflow Dispatch error', error.message);

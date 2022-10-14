@@ -59,7 +59,9 @@ export class WorkflowHandler {
   async triggerWorkflow(inputs: any): Promise<any> {
     try {
       const workflowId = await this.getWorkflowId()
+      core.info(`this.triggerWorkflow(): workflowId: ${workflowId}`)
       this.triggerDate = Date.now()
+      core.info(`this.triggerWorkflow(): triggerDate: ${this.triggerDate}`)
       const dispatchResp = await this.octokit.actions.createWorkflowDispatch({
         owner: this.owner,
         repo: this.repo,
@@ -67,7 +69,8 @@ export class WorkflowHandler {
         ref: this.ref,
         inputs
       })
-      debug('Workflow Dispatch', dispatchResp)
+      core.info(`this.triggerWorkflow(): dispatchResp: ${dispatchResp}`)
+      // debug('Workflow Dispatch', dispatchResp)
     } catch (error) {
       debug('Workflow Dispatch error', error.message)
       throw error
