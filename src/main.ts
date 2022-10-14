@@ -66,6 +66,7 @@ function computeConclusion(start: number, waitForCompletionTimeout: number, resu
 async function run(): Promise<void> {
   try {
     const args = getArgs()
+    core.debug(`run(): args: ${args}`)
     const workflowHandler = new WorkflowHandler(args.token, args.workflowRef, args.owner, args.repo, args.ref)
 
     // Trigger workflow run
