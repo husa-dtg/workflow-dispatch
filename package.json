@@ -10,13 +10,13 @@
   "keywords": [
     "github",
     "actions",
-    "worflow",
+    "workflow",
     "trigger"
   ],
   "author": "Aurélien Baudet",
   "license": "MIT",
   "devDependencies": {
-    "@actions/core": "1.2.6",
+    "@actions/core": "1.10.0",
     "@actions/github": "4.0.0",
     "@vercel/ncc": "0.26.1",
     "@typescript-eslint/eslint-plugin": "3.5.0",
