@@ -71,7 +71,7 @@ export class WorkflowHandler {
       core.info(`this.triggerWorkflow(): workflowId: ${workflowId}`)
       this.triggerDate = Date.now()
       core.info(`this.triggerWorkflow(): triggerDate: ${this.triggerDate}`)
-      const dispatchResp = await this.octokit.actions.createWorkflowDispatch({
+      const dispatchResp = await this.octokit.rest.actions.createWorkflowDispatch({
         owner: this.owner,
         repo: this.repo,
         workflow_id: workflowId,
@@ -89,7 +89,7 @@ export class WorkflowHandler {
   async getWorkflowRunStatus(): Promise<WorkflowRunResult> {
     try {
       const runId = await this.getWorkflowRunId()
-      const response = await this.octokit.actions.getWorkflowRun({
+      const response = await this.octokit.rest.actions.getWorkflowRun({
         owner: this.owner,
         repo: this.repo,
         run_id: runId
@@ -112,7 +112,7 @@ export class WorkflowHandler {
   async getWorkflowRunArtifacts(): Promise<WorkflowRunResult> {
     try {
       const runId = await this.getWorkflowRunId()
-      const response = await this.octokit.actions.getWorkflowRunArtifacts({
+      const response = await this.octokit.rest.actions.getWorkflowRunArtifacts({
         owner: this.owner,
         repo: this.repo,
         run_id: runId
@@ -138,7 +138,7 @@ export class WorkflowHandler {
     try {
       core.debug('Get workflow run id')
       const workflowId = await this.getWorkflowId()
-      const response = await this.octokit.actions.listWorkflowRuns({
+      const response = await this.octokit.rest.actions.listWorkflowRuns({
         owner: this.owner,
         repo: this.repo,
         workflow_id: workflowId,
@@ -180,7 +180,7 @@ export class WorkflowHandler {
       return this.workflowId
     }
     try {
-      const workflowsResp = await this.octokit.actions.listRepoWorkflows({
+      const workflowsResp = await this.octokit.rest.actions.listRepoWorkflows({
         owner: this.owner,
         repo: this.repo
       })
